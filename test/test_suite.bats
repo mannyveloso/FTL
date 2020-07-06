@@ -145,14 +145,12 @@
   run bash -c "dig AAAA google.com @127.0.0.1 +short +tcp"
   printf "%s\n" "${lines[@]}"
   [[ ${lines[0]} != "::" ]]
-  [[ ${lines[1]} == "" ]]
 }
 
 @test "Known host is resolved as expected" {
-  run bash -c "dig ftl.pi-hole.net @127.0.0.1 +short"
+  run bash -c "dig A ftl.pi-hole.net @127.0.0.1 +short"
   printf "%s\n" "${lines[@]}"
-  [[ ${lines[0]} == "139.59.170.52" ]]
-  [[ ${lines[1]} == "" ]]
+  [[ ${lines[0]} != "0.0.0.0" ]]
 }
 
 @test "Statistics as expected" {
